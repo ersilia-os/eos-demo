@@ -15,7 +15,7 @@ Demo repository for testing the Ersilia Model Hub incorporation pipeline, based 
    - **Tag**: Malaria,P.falciparum
    - **Publication**: https://jcheminf.biomedcentral.com/articles/10.1186/s13321-021-00487-2
    - **Code**: https://www.ebi.ac.uk/chembl/maip/
-   - **License**: GPLv3
+   - **License**: GPL-3.0
 
 ### Wait until model approval
 
