@@ -53,7 +53,7 @@ for i, smi in enumerate(smiles):
     X[i] = fp
 
 # run maip predictions
-model = joblib.load(os.path.join(ROOT, "..", "checkpoints", "MAIP_flaml_3600s.joblib"))
+model = joblib.load(os.path.join(ROOT, "..", "checkpoints", "random_forest.joblib"))
 
 preds = model.predict(X)
 
