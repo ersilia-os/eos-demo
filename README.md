@@ -49,3 +49,24 @@ Demo repository for testing the Ersilia Model Hub incorporation pipeline, based 
 
 1. The `ersilia-bot` will open a new issue at `ersilia-os/eosXabc`. As you will see, someone from the Ersilia community will be assigned as a reviewer of the model.
 2. If you are a member of the [Ersilia Slack workspace](https://ersilia-workspace.slack.com/), then you may also see activity triggered around your model.
+
+## Test the model
+
+You can test the model following these steps:
+
+### Fetch the model
+
+To run the model locally, you can fetch is with the `fetch` command.
+```bash
+ersilia fetch esoXabc
+```
+### Run predictions
+
+You can create an example file and run predictions easily:
+
+```bash
+ersilia serve eosXabc
+ersilia example -f my_input.csv
+ersilia api -i my_input -o my_output.csv
+ersilia close
+```
