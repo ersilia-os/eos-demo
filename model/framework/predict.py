@@ -25,15 +25,15 @@ RADIUS = 3
 NBITS = 2048
 DTYPE = np.int8
 
+
 def clip_sparse(vect, nbits):
-    l = [0]*nbits
-    for i,v in vect.GetNonzeroElements().items():
+    l = [0] * nbits
+    for i, v in vect.GetNonzeroElements().items():
         l[i] = v if v < 127 else 127
     return l
 
 
 class Descriptor(object):
-
     def __init__(self):
         self.nbits = NBITS
         self.radius = RADIUS
@@ -41,6 +41,7 @@ class Descriptor(object):
     def calc(self, mol):
         v = rd.GetHashedMorganFingerprint(mol, radius=self.radius, nBits=self.nbits)
         return clip_sparse(v, self.nbits)
+
 
 desc = Descriptor()
 
