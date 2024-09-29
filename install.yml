@@ -1,5 +1,5 @@
 python: "3.10"
 
 commands: 
-  - ["pip", "install", "rdkit", "2024.03.5"]
-  - ["pip", "install", "scikit-learn", "1.5.2"]
+  - ["pip", "rdkit", "2024.03.5"]
+  - ["pip", "scikit-learn", "1.5.2"]
