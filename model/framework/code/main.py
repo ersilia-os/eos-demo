@@ -5,7 +5,7 @@ import numpy as np
 import joblib
 
 from rdkit import Chem
-from rdkit.Chem import rdMolDescriptors as rd
+from rdkit.Chem import rdFingerprintGenerator
 
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -20,37 +20,27 @@ with open(infile, "r") as f:
     for r in reader:
         smiles += [r[0]]
 
-# calculate morgan fingerprints
+# calculate morgan fingerprintsss
 RADIUS = 3
 NBITS = 2048
-DTYPE = np.int8
-
+mfpgen = rdFingerprintGenerator.GetMorganGenerator(radius=RADIUS,fpSize=NBITS)
 
 def clip_sparse(vect, nbits):
     l = [0] * nbits
     for i, v in vect.GetNonzeroElements().items():
-        l[i] = v if v < 127 else 127
+        l[i] = v if v < 255 else 255
     return l
-
-
-class Descriptor(object):
-    def __init__(self):
-        self.nbits = NBITS
-        self.radius = RADIUS
-
-    def calc(self, mol):
-        v = rd.GetHashedMorganFingerprint(mol, radius=self.radius, nBits=self.nbits)
-        return clip_sparse(v, self.nbits)
-
-
-desc = Descriptor()
+    
+def morganfp(mol):
+    v = mfpgen.GetCountFingerprint(mol)
+    return clip_sparse(v, NBITS)
 
 X = np.zeros((len(smiles), NBITS), dtype=np.int8)
 for i, smi in enumerate(smiles):
     mol = Chem.MolFromSmiles(smi)
     if mol is None:
         continue
-    fp = np.array(desc.calc(mol), dtype=np.int8)
+    fp = np.array(morganfp(mol), dtype=np.int8)
     X[i] = fp
 
 # run maip predictions

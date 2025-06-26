@@ -1,7 +1,6 @@
 import sys
 import os
 import shutil
-import json
 import yaml
 
 root_dir = os.path.dirname(os.path.abspath(__file__))
@@ -17,14 +16,21 @@ metadata_yaml = os.path.join(os.path.join(model_dir, "metadata.yml"))
 with open(metadata_yaml, "r") as f:
     metadata = yaml.safe_load(f)
 
-metadata["Mode"] = "Retrained"
-metadata["Task"] = ["Classification"]
+metadata["Deployment"] = ["Local"]
+metadata["Source"] = "Local"
+metadata["Source Type"] = "Replicated"
+metadata["Task"] = "Annotation"
+metadata["Subtask"] = "Activity prediction"
 metadata["Input"] = ["Compound"]
-metadata["Input Shape"] = "Single"
+metadata["Input Dimension"] = 1
 metadata["Output"] = ["Score"]
-metadata["Output Type"] = ["Float"]
-metadata["Output Shape"] = "Single"
-metadata["Interpretation"] = "Classification score"
+metadata["Output Dimension"] = 1
+metadata["Output Consistency"] = "Fixed"
+metadata["Interpretation"] = "Classification score, higher values indicate higher inhibition potential"
+metadata["Biomedical Area"] = ["Malaria"]
+metadata["Target Organism"] = ["Plasmodium falciparum"]
+metadata["Publication Type"] = "Peer reviewed"
+metadata["Publication Year"] = 2025
 
 with open(metadata_yaml, "w") as f:
     yaml.dump(metadata, f, default_flow_style=False, sort_keys=False)

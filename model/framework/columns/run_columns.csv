@@ -1,0 +1,2 @@
+name,type,direction,description
+score,float,high,Score indicating the inhibitiory potential of the compound for Pfalciparum
